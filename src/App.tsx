@@ -553,34 +553,35 @@ const App: FC = () => {
   if (!currentModel) return <p className="text-center text-red-500">Loading model...</p>;
 
   return (
-    <div className="min-h-screen bg-gray-100 p-4 md:p-8">
-      <div className="container mx-auto bg-white shadow-xl rounded-lg">
-        <header className="bg-blue-600 text-white p-6 rounded-t-lg">
-          <h1 className="text-3xl font-bold">Pricing Model Calculator</h1>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-100 p-4 md:p-8 flex flex-col items-center justify-center">
+      <div className="container max-w-4xl mx-auto bg-white/90 shadow-2xl rounded-3xl border border-gray-200 backdrop-blur-md">
+        <header className="bg-gradient-to-r from-blue-700 via-blue-500 to-purple-500 text-white p-8 rounded-t-3xl shadow-md flex flex-col items-center">
+          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight drop-shadow-lg mb-2">Pricing Model Calculator</h1>
+          <span className="text-lg font-medium opacity-80">Modern & Flexible</span>
         </header>
 
-        <div className="p-6 md:p-8">
-          <div className="mb-8">
-            <label htmlFor="model-select" className="block text-lg font-medium text-gray-700 mb-2">Select Pricing Model:</label>
+        <div className="p-6 md:p-10">
+          <div className="mb-10">
+            <label htmlFor="model-select" className="block text-lg font-semibold text-gray-700 mb-3">Select Pricing Model:</label>
             <select
               id="model-select"
               value={selectedModelKey}
               onChange={(e: ChangeEvent<HTMLSelectElement>) => setSelectedModelKey(e.target.value)}
-              className="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-lg"
+              className="w-full p-3 border-2 border-blue-200 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-blue-400 text-lg transition-all bg-white hover:border-blue-400"
             >
               {Object.keys(PRICING_MODELS_CONFIG).map(key => (
                 <option key={key} value={key}>{PRICING_MODELS_CONFIG[key].name}</option>
               ))}
             </select>
-            <p className="mt-2 text-sm text-gray-600">{currentModel.description}</p>
+            <p className="mt-3 text-base text-gray-500 italic">{currentModel.description}</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            <div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
-              <h2 className="text-2xl font-semibold text-gray-800 mb-4">Inputs</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+            <div className="bg-white/80 p-8 rounded-2xl border border-gray-200 shadow-md">
+              <h2 className="text-2xl font-bold text-blue-700 mb-6 flex items-center gap-2"><span className="inline-block w-2 h-2 bg-blue-400 rounded-full animate-pulse"></span> Inputs</h2>
               {currentModel.inputs.map(input => (
-                <div key={input.name} className="mb-4">
-                  <label htmlFor={input.name} className="block text-sm font-medium text-gray-700 mb-1">{input.label}:</label>
+                <div key={input.name} className="mb-6">
+                  <label htmlFor={input.name} className="block text-base font-medium text-gray-700 mb-2">{input.label}:</label>
                   {input.type === 'number' && (
                     <input
                       type="number"
@@ -591,7 +592,7 @@ const App: FC = () => {
                       min={input.min}
                       max={input.max}
                       step={input.name.toLowerCase().includes('rate') ? "0.01" : "1"}
-                      className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full p-3 border-2 border-gray-200 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-blue-400 text-lg transition-all bg-gray-50 hover:border-blue-400"
                     />
                   )}
                   {input.type === 'select' && (
@@ -600,37 +601,37 @@ const App: FC = () => {
                       name={input.name}
                       value={inputs[input.name] as string || ''}
                       onChange={(e: ChangeEvent<HTMLSelectElement>) => handleInputChange(input.name, e.target.value)}
-                      className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full p-3 border-2 border-gray-200 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-blue-400 text-lg transition-all bg-gray-50 hover:border-blue-400"
                     >
                       {input.options?.map(opt => <option key={opt} value={opt}>{opt}</option>)}
                     </select>
                   )}
                   {input.type === 'boolean' && (
-                    <label className="flex items-center space-x-2 cursor-pointer">
+                    <label className="flex items-center space-x-3 cursor-pointer select-none">
                       <input
                         type="checkbox"
                         id={input.name}
                         name={input.name}
                         checked={!!inputs[input.name]}
                         onChange={() => handleInputChange(input.name, !inputs[input.name])}
-                        className="h-5 w-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                        className="h-5 w-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500 transition-all"
                       />
-                       <span className="text-sm text-gray-700">{inputs[input.name] ? 'Yes' : 'No'}</span>
+                       <span className="text-base text-gray-700">{inputs[input.name] ? 'Yes' : 'No'}</span>
                     </label>
                   )}
                 </div>
               ))}
             </div>
 
-            <div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
-              <h2 className="text-2xl font-semibold text-gray-800 mb-4">Calculated Outputs</h2>
+            <div className="bg-gradient-to-br from-blue-50 via-white to-purple-100 p-8 rounded-2xl border border-gray-200 shadow-md">
+              <h2 className="text-2xl font-bold text-purple-700 mb-6 flex items-center gap-2"><span className="inline-block w-2 h-2 bg-purple-400 rounded-full animate-pulse"></span> Calculated Outputs</h2>
               {Object.entries(outputs).map(([key, result]) => (
-                <div key={key} className="mb-4 p-3 border border-gray-200 rounded-md bg-white">
-                  <h3 className="text-md font-semibold text-blue-700 capitalize">{key.replace(/([A-Z])/g, ' $1')}:</h3>
-                  <p className="text-2xl font-bold text-gray-800">
+                <div key={key} className="mb-6 p-4 border border-gray-200 rounded-xl bg-white/90 shadow-sm hover:shadow-lg transition-all">
+                  <h3 className="text-md font-semibold text-blue-700 capitalize mb-1 tracking-wide">{key.replace(/([A-Z])/g, ' $1')}:</h3>
+                  <p className="text-2xl font-extrabold text-gray-900">
                     {typeof result.value === 'number' ? result.value.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : result.value}
                   </p>
-                  <p className="text-xs text-gray-500 mt-1">
+                  <p className="text-xs text-gray-500 mt-2">
                     <span className="font-semibold">Calculation:</span> {result.formula}
                   </p>
                 </div>
