@@ -75,10 +75,10 @@ const parseFloatOrZero = (value: string | number): number => {
 // Base class logic (simplified for UI)
 const BasePricingModelLogic = {
   isPacingOnImpressions: (buyMetricId?: BuyMetricValues): boolean => buyMetricId === BUY_METRICS.CPM,
-  getDeliveredMetrics: (pacingFromAdServer: boolean, buyMetricId: BuyMetricValues, actualDeliveredUnits: number): number => {
+  getDeliveredMetrics: (_pacingFromAdServer: boolean, _buyMetricId: BuyMetricValues, actualDeliveredUnits: number): number => {
     return actualDeliveredUnits;
   },
-  calculateSpendFromMetrics: (pacingFromAdServer: boolean, buyMetricId: BuyMetricValues, actualDeliveredUnits: number, rate: number, budget: number, capBudget: boolean = true): number => {
+  calculateSpendFromMetrics: (_pacingFromAdServer: boolean, buyMetricId: BuyMetricValues, actualDeliveredUnits: number, rate: number, budget: number, capBudget: boolean = true): number => {
     let clientSpend = rate * actualDeliveredUnits;
     if (BasePricingModelLogic.isPacingOnImpressions(buyMetricId)) {
       clientSpend = (rate * actualDeliveredUnits) / 1000;
