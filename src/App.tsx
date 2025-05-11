@@ -557,7 +557,7 @@ const App: FC = () => {
       <div className="container max-w-4xl mx-auto bg-white/90 shadow-2xl rounded-3xl border border-gray-200 backdrop-blur-md">
         <header className="bg-gradient-to-r from-blue-700 via-blue-500 to-purple-500 text-white p-8 rounded-t-3xl shadow-md flex flex-col items-center">
           <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight drop-shadow-lg mb-2">Pricing Model Calculator</h1>
-          <span className="text-lg font-medium opacity-80">Modern & Flexible</span>
+          <span className="text-lg font-medium opacity-80">Rubii Ltd.</span>
         </header>
 
         <div className="p-6 md:p-10">
